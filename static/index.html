@@ -272,18 +272,17 @@ mouse.mousedraggers.push(function(x,y,clicked,e) {
 
 function update() {
     //XXX: TODO Get the world from the webservice using a XMLHTTPRequest
-    function callback(text) {
-        if (text != {} && text != "{}") {
-            var new_world = JSON.parse(text);
-            for (var i in new_world) {
-                world[i] = new_world[i];
-            }
-        }
-        drawFrame();
+    let url = "/world"
+    let get = new XMLHttpRequest();
+    get.open('GET', url);
+    get.send();
+    get.onload = () => {
+        world = JSON.parse(get.response);
+        drawNextFrame();
     }
+    drawFrame();
     console.log("update");
-    
-    sendJSONXMLHTTPRequest("/world", null, callback);
+    // sendJSONXMLHTTPRequest("/world", null, callback);
 }
 
 // 30 frames per second
