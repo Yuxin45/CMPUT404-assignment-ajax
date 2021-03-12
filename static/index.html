@@ -22,7 +22,7 @@
     "/>
     <script src="json2.js"></script>
   </head> 
-  <body bgcolor="" height="100%" width="100%"> 
+  <body bgcolor="#f9d1d1" height="100%" width="100%"> 
     <canvas id="c" width="100%" height="100%" style="-webkit-tap-highlight-color: transparent;"></canvas> 
     <script>
 var canvas = document.getElementById('c');
@@ -72,7 +72,7 @@ function drawCircle(context,entity) {
         //moveTo(x,y);
         fillStyle = entity["colour"];
         strokeStyle = fillStyle;
-        arc(x, y, (entity["radius"])?entity["radius"]:50, 0, 2.0 * Math.PI, false);  
+        arc(x, y, (entity["radius"])?entity["radius"]:40, 0, 2.0 * Math.PI, false);  
         stroke();                                
     }
 }
@@ -82,7 +82,8 @@ function prepEntity(entity) {
         entity["colour"] = "#FF0000";
     }
     if (!entity["radius"]) {
-        entity["radius"] = 50;
+        var r = Math.floor(Math.random() * 40);
+        entity["radius"] = r;
     }
     return entity;
 }
@@ -90,7 +91,7 @@ function prepEntity(entity) {
 function clearFrame() {
     with(context) {
 	moveTo(0,0);
-	fillStyle = "#000";
+	fillStyle = "#f9d1d1";
 	fillRect(0,0,W,H);
     }
 
@@ -260,6 +261,7 @@ mouse = (function() {
 
 // reference: https://css-tricks.com/snippets/javascript/random-hex-color/
 mouse.mousedowners.push(function(x,y,clicked,e) {
+
     var randomColor = Math.floor(Math.random()*16777215).toString(16);
     addEntityWithoutName({'x':x,'y':y,'colour':'#'+randomColor});
 });
