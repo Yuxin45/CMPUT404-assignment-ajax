@@ -287,7 +287,7 @@ function update() {
     get.open('GET', url);
     get.send();
     get.onload = () => {
-        var cur_world = JSON.parse(get.response);
+        world = JSON.parse(get.response);
         // if (cur_world !== world) {
         drawNextFrame();
         // }
