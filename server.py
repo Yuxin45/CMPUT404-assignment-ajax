@@ -83,6 +83,7 @@ def update(entity):
     post_data = flask_post_json()
     myWorld.set(entity, post_data)
     get_data = myWorld.get(entity)
+    # console.log(get_data)
     return json.dumps(get_data)
 
 @app.route("/world", methods=['POST','GET'])    
@@ -108,7 +109,7 @@ def get_entity(entity):
 def clear():
     '''Clear the world out!'''
     myWorld.clear()
-    return myWorld.world()
+    return json.dumps(myWorld.world())
 
 if __name__ == "__main__":
     app.run()

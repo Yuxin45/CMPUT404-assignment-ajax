@@ -42,7 +42,7 @@ function sendJSONXMLHTTPRequest(url, objects, callback) {
                     //XXX: Pass the data to the callback!
                     var text = JSON.parse(xhr.responseText)
                     callback(text)
-                    console.log(text)
+                    // console.log(text)
                 }
             } 
             catch(e) {
@@ -151,6 +151,7 @@ function addEntity(entity, data) {
     drawNextFrame(); // (but should we?)
     //XXX: Send a XHTML Request that updates the entity you just  modified!
     sendJSONXMLHTTPRequest("/entity/"+ entity, data, callback)
+    update();
 }
 
 var counter = 0;
@@ -286,8 +287,10 @@ function update() {
     get.open('GET', url);
     get.send();
     get.onload = () => {
-        world = JSON.parse(get.response);
-        drawNextFrame();
+        var cur_world = JSON.parse(get.response);
+        if (cur_world !== world) {
+            drawNextFrame();
+        }
     }
     drawFrame();
     console.log("update");
