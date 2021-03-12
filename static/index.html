@@ -73,7 +73,7 @@ function drawCircle(context,entity) {
         //moveTo(x,y);
         fillStyle = entity["colour"];
         strokeStyle = fillStyle;
-        arc(x, y, (entity["radius"])?entity["radius"]:40, 0, 2.0 * Math.PI, false);  
+        arc(x, y, (entity["radius"])?entity["radius"]:25, 0, 2.0 * Math.PI, false);  
         stroke();                                
     }
 }
@@ -83,8 +83,8 @@ function prepEntity(entity) {
         entity["colour"] = "#FF0000";
     }
     if (!entity["radius"]) {
-        var r = Math.floor(Math.random() * 40);
-        entity["radius"] = r;
+        // var r = Math.floor(Math.random() * 40);
+        entity["radius"] = 25;
     }
     return entity;
 }
@@ -288,9 +288,9 @@ function update() {
     get.send();
     get.onload = () => {
         var cur_world = JSON.parse(get.response);
-        if (cur_world !== world) {
-            drawNextFrame();
-        }
+        // if (cur_world !== world) {
+        drawNextFrame();
+        // }
     }
     drawFrame();
     console.log("update");
